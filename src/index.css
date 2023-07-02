@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap");
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 :root {
   --dark-one: #0a0b0c;
   --light-one: #fff;
@@ -29,6 +31,7 @@ body {
   font-size: 1.4rem;
   background: var(--dark-one);
   color: var(--light-one);
+  margin-bottom: 30rem;
 }
 nav {
   padding: 2rem 2.5rem;
@@ -70,12 +73,15 @@ nav {
   color: var(--light-one);
 }
 .home_page {
-  /* padding: 0 2.5rem; */
   margin: 0 auto;
 }
 .header_section {
-  pointer-events: none;
+  position: relative;
   height: 75vh;
+  margin-bottom: 8rem;
+}
+.slick-dots {
+  display: none !important;
 }
 .movie_poster {
   position: relative;
@@ -86,7 +92,7 @@ nav {
 }
 .header_overlay {
   position: absolute;
-  background: rgba(10, 11, 12, 0.815);
+  background: rgba(10, 11, 12, 0.85);
   top: 0;
   left: 0;
   height: 100%;
@@ -101,6 +107,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  pointer-events: none;
 }
 .header_title {
   font-size: 3.8rem;
@@ -126,4 +133,25 @@ nav {
   letter-spacing: 1.2px;
   line-height: 1.2;
   font-size: 1.5rem;
+}
+/*  */
+/* TRENDING SECTION */
+/*  */
+.home_page_section {
+  padding: 0 4rem;
+}
+.trending_header_text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 4.5rem;
+}
+.home_page_section p {
+  font-size: 2.4rem;
+}
+.trending_header_text span {
+  height: 2.5px;
+  width: 90px;
+  background: var(--yellow-one);
+  margin-top: 2rem;
 }

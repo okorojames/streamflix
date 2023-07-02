@@ -17,17 +17,15 @@ const Header = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 200,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 700,
+    autoplaySpeed: 6000,
     arrows: false,
     draggable: false,
   };
-  {
-    movies && console.log(movies);
-  }
+
   // Rendering the data in the UI
   return (
     <header className="header_section">
@@ -56,6 +54,7 @@ const Header = () => {
           ))}
         </Slider>
       )}
+      {/*second header content card of the image*/}
     </header>
   );
 };
