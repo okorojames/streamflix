@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/bundle";
+import { Link } from "react-router-dom";
 
 SwiperCore.use([Autoplay]);
 
@@ -112,21 +113,23 @@ const Home = () => {
               >
                 {upcomingMovies.map((movie) => (
                   <SwiperSlide key={movie.id}>
-                    <div className="home_movie_card">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                        className="home_movie_img"
-                        alt=""
-                      />
-                      <div className="home_movie_context">
-                        <div className="home_movie_name">
-                          {truncateTitle(movie.title || movie.name)}
-                        </div>
-                        <div className="home_movie_date">
-                          {movie.release_date || movie.first_air_date}
+                    <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
+                      <div className="home_movie_card">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                          className="home_movie_img"
+                          alt=""
+                        />
+                        <div className="home_movie_context">
+                          <div className="home_movie_name">
+                            {truncateTitle(movie.title || movie.name)}
+                          </div>
+                          <div className="home_movie_date">
+                            {movie.release_date || movie.first_air_date}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -166,21 +169,23 @@ const Home = () => {
             >
               {movies.map((movie) => (
                 <SwiperSlide key={movie.id}>
-                  <div className="home_movie_card">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                      className="home_movie_img"
-                      alt=""
-                    />
-                    <div className="home_movie_context">
-                      <div className="home_movie_name">
-                        {truncateTitle(movie.title || movie.name)}
-                      </div>
-                      <div className="home_movie_date">
-                        {movie.release_date || movie.first_air_date}
+                  <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
+                    <div className="home_movie_card">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                        className="home_movie_img"
+                        alt=""
+                      />
+                      <div className="home_movie_context">
+                        <div className="home_movie_name">
+                          {truncateTitle(movie.title || movie.name)}
+                        </div>
+                        <div className="home_movie_date">
+                          {movie.release_date || movie.first_air_date}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -224,21 +229,23 @@ const Home = () => {
               >
                 {mostRated.map((movie) => (
                   <SwiperSlide key={movie.id}>
-                    <div className="home_movie_card">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                        className="home_movie_img"
-                        alt=""
-                      />
-                      <div className="home_movie_context">
-                        <div className="home_movie_name">
-                          {truncateTitle(movie.title || movie.name)}
-                        </div>
-                        <div className="home_movie_date">
-                          {movie.release_date || movie.first_air_date}
+                    <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
+                      <div className="home_movie_card">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                          className="home_movie_img"
+                          alt=""
+                        />
+                        <div className="home_movie_context">
+                          <div className="home_movie_name">
+                            {truncateTitle(movie.title || movie.name)}
+                          </div>
+                          <div className="home_movie_date">
+                            {movie.release_date || movie.first_air_date}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </SwiperSlide>
                 ))}
               </Swiper>

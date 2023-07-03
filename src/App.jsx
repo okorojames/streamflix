@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import MovieDetails from "./pages/MovieDetails";
 
 const App = () => {
   const date = new Date().getFullYear();
@@ -10,6 +11,7 @@ const App = () => {
       <main className="main_sections">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/movie_details/:id" element={<MovieDetails />} />
         </Routes>
       </main>
       <footer className="footer_section">
