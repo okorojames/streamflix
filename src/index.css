@@ -26,6 +26,7 @@ a {
   color: inherit;
 }
 body {
+  position: relative;
   font-family: "Poppins", sans-serif;
   /* font-family: 'Rubik', sans-serif; */
   font-size: 1.4rem;
@@ -34,10 +35,14 @@ body {
   margin-bottom: 30rem;
 }
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 60;
   padding: 2rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: var(--dark-one);
 }
 .nav_logo {
   display: flex;
