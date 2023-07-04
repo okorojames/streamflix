@@ -11,10 +11,10 @@ const MovieDetails = () => {
     // get movie trailer
     const getTrailer = async () => {
       try {
-        const res = await fetch(
-          `http://api.themoviedb.org/3/movie/${state.movie.id}/videos?api_key=296b046a3d7afb8c7d9de3d141e11353`
+        const trailerRes = await fetch(
+          `https://api.themoviedb.org/3/movie/${state.movie.id}/videos?api_key=296b046a3d7afb8c7d9de3d141e11353`
         );
-        const trailerData = await res.json();
+        const trailerData = await trailerRes.json();
         setTrailer(trailerData.results[0]);
       } catch (err) {
         console.log(err);

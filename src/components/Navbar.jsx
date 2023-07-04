@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to="/" className="nav_link">
           Home
         </Link>
-        <Link to="/all-movies" className="nav_link">
+        <Link to="/movies" className="nav_link">
           Movies/Tv-Shows
         </Link>
         <button className="nav_link logout_btn">Logout</button>
