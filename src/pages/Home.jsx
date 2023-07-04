@@ -12,11 +12,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/bundle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 SwiperCore.use([Autoplay]);
 
 const Home = () => {
+  //
+  const navigate = useNavigate();
+  // check if user is logged in
+  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  useEffect(() => {
+    if (!users_data_exists) {
+      navigate("/login");
+    }
+  }, []);
   // states
   const [movies, setMovies] = useState();
   const [upcomingMovies, setUpcomingMovies] = useState();
@@ -60,7 +69,7 @@ const Home = () => {
     getMovies();
   }, []);
 
-  // set product title limit
+  // set movie title limit
   const titleLimit = 25;
   const truncateTitle = (title) => {
     if (title.length > titleLimit) {

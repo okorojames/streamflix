@@ -358,6 +358,7 @@ nav {
   border: 0;
   background: var(--red-one);
   color: var(--light-one);
+  cursor: pointer;
 }
 .register_footer {
   margin-top: 1rem;
@@ -366,6 +367,20 @@ nav {
 .register_footer a {
   color: var(--red-one);
   text-decoration: underline;
+}
+.password_input_wrapper {
+  position: relative;
+}
+.passsword_eye {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  transform: translate(0, -50%);
+  width: 22px;
+  stroke: #0a0b0c;
+}
+.register_err {
+  color: var(--red-one);
 }
 /*  */
 /*  */
@@ -425,11 +440,12 @@ nav {
   .nav_links {
     position: fixed;
     flex-direction: column;
-    background: var(--dark-one);
+    background: rgba(10, 11, 12, 0.78);
+    backdrop-filter: blur(6px);
     right: -2000px;
     top: 74px;
     height: 100vh;
-    width: 40%;
+    width: 50%;
     align-items: center;
     gap: 6rem;
     padding-right: 0;
@@ -443,7 +459,7 @@ nav {
 }
 @media screen and (max-width: 478px) {
   .nav_links {
-    width: 80%;
+    width: 90%;
   }
   .header_text_overlay {
     width: 90%;
@@ -472,6 +488,9 @@ nav {
   }
 }
 @media screen and (max-width: 376px) {
+  .register_form div {
+    width: 100%;
+  }
   .register_form input {
     width: 100%;
   }

@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Movies = () => {
+  //
+  const navigate = useNavigate();
+  // check if user is logged in
+  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  useEffect(() => {
+    if (!users_data_exists) {
+      navigate("/login");
+    }
+  }, []);
+
+  //
   return (
     <div
       style={{

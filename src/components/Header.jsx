@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  //
+  const navigate = useNavigate();
+  // check if user is logged in
+  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  useEffect(() => {
+    if (!users_data_exists) {
+      navigate("/login");
+    }
+  }, []);
   const {
     data: movies,
     loading,
@@ -24,6 +34,17 @@ const Header = () => {
     autoplaySpeed: 6000,
     arrows: false,
     draggable: false,
+  };
+
+  //
+  // set movie desc limit
+  const titleLimit = 180;
+  const truncateTitle = (title) => {
+    if (title.length > titleLimit) {
+      let slicedTitle = title.slice(0, titleLimit);
+      return slicedTitle + "...";
+    }
+    return title;
   };
 
   // Rendering the data in the UI
@@ -47,7 +68,9 @@ const Header = () => {
                     <i className="bx bxs-star"></i>
                   </div>
                 </div>
-                <div className="header_desc">{movie.overview}</div>
+                <div className="header_desc">
+                  {truncateTitle(movie.overview)}
+                </div>
               </div>
               <div className="header_overlay"></div>
             </div>

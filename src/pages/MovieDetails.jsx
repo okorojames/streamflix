@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const MovieDetails = () => {
+  //
+  const navigate = useNavigate();
+  // check if user is logged in
+  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  useEffect(() => {
+    if (!users_data_exists) {
+      navigate("/login");
+    }
+  }, []);
+
+  //
   let { state } = useLocation();
   const [movie, setMovie] = useState();
   const [trailer, setTrailer] = useState();
@@ -24,6 +35,8 @@ const MovieDetails = () => {
     };
     getTrailer();
   }, []);
+
+  //
 
   //
   return (
@@ -64,7 +77,7 @@ const MovieDetails = () => {
               ) : (
                 <>
                   <p>Watch Trailer Here</p>
-                  <i class="bx bx-chevrons-down"></i>
+                  <i className="bx bx-chevrons-down"></i>
                 </>
               )}
             </div>
