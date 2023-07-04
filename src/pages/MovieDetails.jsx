@@ -4,8 +4,23 @@ import { Link, useLocation } from "react-router-dom";
 const MovieDetails = () => {
   let { state } = useLocation();
   const [movie, setMovie] = useState();
+  const [trailer, setTrailer] = useState();
   useEffect(() => {
     setMovie(state.movie);
+    //
+    // get movie trailer
+    const getTrailer = async () => {
+      try {
+        const res = await fetch(
+          `http://api.themoviedb.org/3/movie/${state.movie.id}/videos?api_key=296b046a3d7afb8c7d9de3d141e11353`
+        );
+        const trailerData = await res.json();
+        setTrailer(trailerData.results[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getTrailer();
   }, []);
 
   //
@@ -43,16 +58,24 @@ const MovieDetails = () => {
             <div className="movie_details_desc">{movie.overview}</div>
             <div className="trailer_row">
               <p>Watch Trailer Here</p>
-              <Link
-              // to={`http://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=296b046a3d7afb8c7d9de3d141e11353`}
-              >
-                <i className="bx bx-play-circle"></i>
-              </Link>
             </div>
           </div>
         </div>
       )}
       {/*  */}
+      {/* Watch Trailer Here */}
+      {trailer && (
+        <div className="trailer_wrapper">
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </article>
   );
 };
