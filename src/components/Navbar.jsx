@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/streamflix-logo.png";
 
 const Navbar = () => {
+  //
+  const navigate = useNavigate();
   // const refs
   const nav_links = useRef();
   const burger_one = useRef();
@@ -14,6 +16,12 @@ const Navbar = () => {
     burger_one.current.classList.toggle("nav_toggle");
     burger_two.current.classList.toggle("nav_toggle");
     burger_three.current.classList.toggle("nav_toggle");
+  };
+
+  // handleLogout
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/register");
   };
 
   //
@@ -29,7 +37,9 @@ const Navbar = () => {
         <Link to="/movies" className="nav_link">
           Movies/Tv-Shows
         </Link>
-        <button className="nav_link logout_btn">Logout</button>
+        <button className="nav_link logout_btn" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
       <div className="hamburger" onClick={handle_toggle_nav}>
         <div className="burger burger_one" ref={burger_one}></div>

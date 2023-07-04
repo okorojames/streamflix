@@ -5,6 +5,7 @@ const MovieDetails = () => {
   let { state } = useLocation();
   const [movie, setMovie] = useState();
   const [trailer, setTrailer] = useState();
+  const [allTrail, setAllTrail] = useState();
   useEffect(() => {
     setMovie(state.movie);
     //
@@ -15,6 +16,7 @@ const MovieDetails = () => {
           `https://api.themoviedb.org/3/movie/${state.movie.id}/videos?api_key=296b046a3d7afb8c7d9de3d141e11353`
         );
         const trailerData = await trailerRes.json();
+        setAllTrail(trailerData.results);
         setTrailer(trailerData.results[0]);
       } catch (err) {
         console.log(err);
@@ -57,7 +59,14 @@ const MovieDetails = () => {
             {/*  */}
             <div className="movie_details_desc">{movie.overview}</div>
             <div className="trailer_row">
-              <p>Watch Trailer Here</p>
+              {allTrail && allTrail.length === 0 ? (
+                <p>No Trailer</p>
+              ) : (
+                <>
+                  <p>Watch Trailer Here</p>
+                  <i class="bx bx-chevrons-down"></i>
+                </>
+              )}
             </div>
           </div>
         </div>

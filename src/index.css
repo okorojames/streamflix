@@ -44,6 +44,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10rem;
 }
 .main_sections {
+  position: relative;
   min-height: calc(100vh - 127px);
   margin-top: 77.5px;
   margin-bottom: 15rem;
@@ -332,6 +333,41 @@ nav {
   height: 500px;
 }
 /*  */
+.register_section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.register_form {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.register_form input {
+  width: 300px;
+  padding: 1rem 0 1rem 1rem;
+}
+.register_form button {
+  padding: 1rem 2rem;
+  outline: 0;
+  border: 0;
+  background: var(--red-one);
+  color: var(--light-one);
+}
+.register_footer {
+  margin-top: 1rem;
+  text-align: center;
+}
+.register_footer a {
+  color: var(--red-one);
+  text-decoration: underline;
+}
+/*  */
 /*  */
 /*  */
 /* footer section */
@@ -436,6 +472,9 @@ nav {
   }
 }
 @media screen and (max-width: 376px) {
+  .register_form input {
+    width: 100%;
+  }
   .movie_details_card {
     width: 90%;
   }
