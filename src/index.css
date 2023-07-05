@@ -393,7 +393,7 @@ nav {
   right: 3%;
   transform: translate(0, -50%);
   width: 22px;
-  stroke: #0a0b0c;
+  stroke: #fff;
 }
 .register_err {
   color: var(--red-one);
