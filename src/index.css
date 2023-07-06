@@ -394,6 +394,7 @@ nav {
   transform: translate(0, -50%);
   width: 22px;
   stroke: #fff;
+  cursor: pointer;
 }
 .register_err {
   color: var(--red-one);
