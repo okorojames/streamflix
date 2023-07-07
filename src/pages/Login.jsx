@@ -15,8 +15,8 @@ const Login = () => {
   }, []);
 
   //
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("johndeo@gmail.com");
+  const [password, setPassword] = useState("John1234");
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -66,12 +66,14 @@ const Login = () => {
           type="email"
           placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <div className="password_input_wrapper">
           <input
             type={passwordType === true ? "password" : "text"}
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
