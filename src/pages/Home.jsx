@@ -120,8 +120,8 @@ const Home = () => {
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                {upcomingMovies.map((movie) => (
-                  <SwiperSlide key={movie.id}>
+                {upcomingMovies.map((movie, index) => (
+                  <SwiperSlide key={index}>
                     <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                       <div className="home_movie_card">
                         <img
@@ -176,8 +176,8 @@ const Home = () => {
               }}
               style={{ display: "grid", gridTemplateColumns: "repeat(8, 1fr)" }}
             >
-              {movies.map((movie) => (
-                <SwiperSlide key={movie.id}>
+              {movies.map((movie, index) => (
+                <SwiperSlide key={index}>
                   <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                     <div className="home_movie_card">
                       <img
@@ -236,8 +236,8 @@ const Home = () => {
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                {mostRated.map((movie) => (
-                  <SwiperSlide key={movie.id}>
+                {mostRated.map((movie, index) => (
+                  <SwiperSlide key={index}>
                     <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                       <div className="home_movie_card">
                         <img
