@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+// import useFetch from "../hooks/useFetch";
 import { MoviesContext } from "../contexts/MoviesContext";
 
 const Movies = () => {
@@ -17,6 +17,7 @@ const Movies = () => {
 
   // normal states
   const [searchedMovies, setSearchedMovies] = useState();
+  const [movies, setMovies] = useState();
 
   //
   const navigate = useNavigate();
@@ -29,13 +30,38 @@ const Movies = () => {
   }, []);
 
   // fetching the datas
-  const {
-    data: movies,
-    loading,
-    error,
-  } = useFetch(
-    `https://api.themoviedb.org/3/trending/all/day?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
-  );
+  useEffect(() => {
+    const getAllMovies = async () => {
+      try {
+        const movies1 = await fetch(
+          `https://api.themoviedb.org/3/trending/all/day?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
+        );
+        const data1 = await movies1.json();
+        const movies2 = await fetch(
+          `https://api.themoviedb.org/3/movie/upcoming?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
+        );
+        const data2 = await movies2.json();
+        const movies3 = await fetch(
+          `https://api.themoviedb.org/3/movie/top_rated?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
+        );
+        const data3 = await movies3.json();
+        const movies4 = await fetch(
+          `https://api.themoviedb.org/3/tv/top_rated?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
+        );
+        const data4 = await movies4.json();
+        const allMovies = [
+          ...data1.results,
+          ...data2.results,
+          ...data3.results,
+          ...data4.results,
+        ];
+        setMovies(allMovies);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllMovies();
+  }, [page]);
 
   // set movie title limit
   const titleLimit = 25;
@@ -119,10 +145,10 @@ const Movies = () => {
         ) : (
           <figure className="movies_display">
             {movies &&
-              movies.map((movie) => (
+              movies.map((movie, index) => (
                 <Link
                   to={`/movie_details/${movie.id}`}
-                  key={movie.id}
+                  key={index}
                   state={{ movie }}
                 >
                   <div className="home_movie_card all_movies">
