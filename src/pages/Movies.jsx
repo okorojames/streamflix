@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import useFetch from "../hooks/useFetch";
 import { MoviesContext } from "../contexts/MoviesContext";
+import MovieSkeletonLoader from "../components/MovieSkeletonLoader";
 
 const Movies = () => {
   //global states here...
@@ -18,6 +19,7 @@ const Movies = () => {
   // normal states
   const [searchedMovies, setSearchedMovies] = useState();
   const [movies, setMovies] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   //
   const navigate = useNavigate();
@@ -56,8 +58,10 @@ const Movies = () => {
           ...data4.results,
         ];
         setMovies(allMovies);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     getAllMovies();
@@ -144,6 +148,22 @@ const Movies = () => {
           </article>
         ) : (
           <figure className="movies_display">
+            {isLoading && (
+              <>
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+                <MovieSkeletonLoader />
+              </>
+            )}
             {movies &&
               movies.map((movie, index) => (
                 <Link
