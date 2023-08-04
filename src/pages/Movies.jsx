@@ -147,9 +147,9 @@ const Movies = () => {
               ))}
           </article>
         ) : (
-          <figure className="movies_display">
-            {isLoading && (
-              <>
+      <>
+{isLoading && (
+              <div className="movies_display">
                 <MovieSkeletonLoader />
                 <MovieSkeletonLoader />
                 <MovieSkeletonLoader />
@@ -162,8 +162,10 @@ const Movies = () => {
                 <MovieSkeletonLoader />
                 <MovieSkeletonLoader />
                 <MovieSkeletonLoader />
-              </>
+              </div>
             )}
+<figure className="movies_display">
+            
             {movies &&
               movies.map((movie, index) => (
                 <Link
@@ -189,6 +191,8 @@ const Movies = () => {
                 </Link>
               ))}
           </figure>
+      </>
+          
         )}
         <div className="next_and_previous_page">
           <button className="next_button" onClick={handleIncrePage}>
