@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieSkeletonLoader = () => {
+export default function MovieSkeletonLoader() {
   return (
     <div className="skeleton_container">
       <div className="skeleton_img"></div>
@@ -8,6 +8,24 @@ const MovieSkeletonLoader = () => {
       <div className="skeleton_p"></div>
     </div>
   );
-};
+}
 
-export default MovieSkeletonLoader;
+// all the loader
+export const MovieSkeletonLoaders = () => {
+  return (
+    <div className="skeleton_display">
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+      <MovieSkeletonLoader />
+    </div>
+  );
+};

@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import useFetch from "../hooks/useFetch";
 import { MoviesContext } from "../contexts/MoviesContext";
-import MovieSkeletonLoader from "../components/MovieSkeletonLoader";
+import MovieSkeletonLoader, {
+  MovieSkeletonLoaders,
+} from "../components/MovieSkeletonLoader";
 
 const Movies = () => {
   //global states here...
@@ -58,7 +60,7 @@ const Movies = () => {
           ...data4.results,
         ];
         setMovies(allMovies);
-        setIsLoading(true);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
         setIsLoading(false);
@@ -147,52 +149,35 @@ const Movies = () => {
               ))}
           </article>
         ) : (
-      <>
-{isLoading && (
-              <div className="movies_display">
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-                <MovieSkeletonLoader />
-              </div>
-            )}
-<figure className="movies_display">
-            
-            {movies &&
-              movies.map((movie, index) => (
-                <Link
-                  to={`/movie_details/${movie.id}`}
-                  key={index}
-                  state={{ movie }}
-                >
-                  <div className="home_movie_card all_movies">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                      className="home_movie_img"
-                      alt=""
-                    />
-                    <div className="home_movie_context">
-                      <div className="home_movie_name">
-                        {truncateTitle(movie.title || movie.name)}
-                      </div>
-                      <div className="home_movie_date">
-                        {movie.release_date || movie.first_air_date}
+          <>
+            {isLoading && <MovieSkeletonLoaders />}
+            <figure className="movies_display">
+              {movies &&
+                movies.map((movie, index) => (
+                  <Link
+                    to={`/movie_details/${movie.id}`}
+                    key={index}
+                    state={{ movie }}
+                  >
+                    <div className="home_movie_card all_movies">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                        className="home_movie_img"
+                        alt=""
+                      />
+                      <div className="home_movie_context">
+                        <div className="home_movie_name">
+                          {truncateTitle(movie.title || movie.name)}
+                        </div>
+                        <div className="home_movie_date">
+                          {movie.release_date || movie.first_air_date}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
-          </figure>
-      </>
-          
+                  </Link>
+                ))}
+            </figure>
+          </>
         )}
         <div className="next_and_previous_page">
           <button className="next_button" onClick={handleIncrePage}>
