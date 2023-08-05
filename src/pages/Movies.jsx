@@ -58,7 +58,7 @@ const Movies = () => {
           ...data4.results,
         ];
         setMovies(allMovies);
-        setIsLoading(false);
+        setIsLoading(true);
       } catch (err) {
         console.log(err);
         setIsLoading(false);
