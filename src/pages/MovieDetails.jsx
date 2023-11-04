@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MovieDetails = () => {
   //
@@ -15,8 +15,8 @@ const MovieDetails = () => {
   //
   let { state } = useLocation();
   const [movie, setMovie] = useState();
-  const [trailer, setTrailer] = useState();
   const [allTrail, setAllTrail] = useState();
+  const [movieTrailer, setMovieTrailer] = useState("");
   useEffect(() => {
     setMovie(state.movie);
     //
@@ -28,15 +28,16 @@ const MovieDetails = () => {
         );
         const trailerData = await trailerRes.json();
         setAllTrail(trailerData.results);
-        setTrailer(trailerData.results[0]);
+        const trail = trailerData.results.filter((result) => {
+          return result.name === "Official Trailer";
+        });
+        setMovieTrailer(trail[0]);
       } catch (err) {
         console.log(err);
       }
     };
     getTrailer();
   }, []);
-
-  //
 
   //
   return (
@@ -60,7 +61,9 @@ const MovieDetails = () => {
             alt=""
           />
           <div className="movie_details_context">
-            <div className="movie_details_title">{movie.title}</div>
+            <div className="movie_details_title">
+              {movie.title || movie.name}
+            </div>
             {/*  */}
             <div className="details_date_and_rating">
               <div className="details_date">{movie.release_date}</div>
@@ -86,12 +89,12 @@ const MovieDetails = () => {
       )}
       {/*  */}
       {/* Watch Trailer Here */}
-      {trailer && (
+      {movieTrailer && (
         <div className="trailer_wrapper">
           <iframe
             width="560"
             height="315"
-            src={`https://www.youtube.com/embed/${trailer.key}`}
+            src={`https://www.youtube.com/embed/${movieTrailer.key}`}
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

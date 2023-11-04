@@ -124,11 +124,13 @@ const Home = () => {
                   <SwiperSlide key={index}>
                     <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                       <div className="home_movie_card">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                          className="home_movie_img"
-                          alt=""
-                        />
+                        <div className="movie__loader_even">
+                          <img
+                            src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                            className="home_movie_img"
+                            alt=""
+                          />
+                        </div>
                         <div className="home_movie_context">
                           <div className="home_movie_name">
                             {truncateTitle(movie.title || movie.name)}
@@ -157,7 +159,7 @@ const Home = () => {
               slidesPerView={2}
               loop={true}
               autoplay={{
-                delay: 2600,
+                delay: 2300,
                 disableOnInteraction: false,
               }}
               breakpoints={{
@@ -180,11 +182,15 @@ const Home = () => {
                 <SwiperSlide key={index}>
                   <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                     <div className="home_movie_card">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                        className="home_movie_img"
-                        alt=""
-                      />
+                      <div className="movie__loader_even">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                          className="home_movie_img"
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+
                       <div className="home_movie_context">
                         <div className="home_movie_name">
                           {truncateTitle(movie.title || movie.name)}
@@ -240,11 +246,13 @@ const Home = () => {
                   <SwiperSlide key={index}>
                     <Link to={`/movie_details/${movie.id}`} state={{ movie }}>
                       <div className="home_movie_card">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                          className="home_movie_img"
-                          alt=""
-                        />
+                        <div className="movie__loader_even">
+                          <img
+                            src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                            className="home_movie_img"
+                            alt=""
+                          />
+                        </div>
                         <div className="home_movie_context">
                           <div className="home_movie_name">
                             {truncateTitle(movie.title || movie.name)}

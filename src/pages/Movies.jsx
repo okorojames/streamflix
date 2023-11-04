@@ -128,11 +128,13 @@ const Movies = () => {
                   state={{ movie }}
                 >
                   <div className="searched_movie_column">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                      alt=""
-                      className="searched_movies_img"
-                    />
+                    <div className="movie__loader_even">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                        alt=""
+                        className="searched_movies_img"
+                      />
+                    </div>
                     <div className="searched_movies_context">
                       <div className="searched_movie_title">
                         {movie.title || movie.name}
@@ -160,11 +162,13 @@ const Movies = () => {
                     state={{ movie }}
                   >
                     <div className="home_movie_card all_movies">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                        className="home_movie_img"
-                        alt=""
-                      />
+                      <div className="movie__loader_even">
+                        <img
+                          src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                          className="home_movie_img"
+                          alt=""
+                        />
+                      </div>
                       <div className="home_movie_context">
                         <div className="home_movie_name">
                           {truncateTitle(movie.title || movie.name)}
