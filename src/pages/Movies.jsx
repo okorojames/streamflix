@@ -203,7 +203,7 @@ const Movies = () => {
               nextLabel=">"
               onPageChange={handlePageClick}
               pageRangeDisplayed={3}
-              pageCount={Math.ceil(total / 20)}
+              pageCount={total / 20}
               previousLabel="<"
               renderOnZeroPageCount={null}
               className="pagination"

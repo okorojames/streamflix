@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Register = () => {
   // checking if user details already exists
-  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  const users_data_exists = JSON.parse(
+    localStorage.getItem("users_details") || ""
+  );
   useEffect(() => {
     if (users_data_exists) {
       navigate("/");
@@ -14,12 +16,12 @@ const Register = () => {
   //
   const navigate = useNavigate();
   // states
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [firstName, setFirstName] = useState<any>();
+  const [lastName, setLastName] = useState<any>();
+  const [email, setEmail] = useState<any>();
+  const [password, setPassword] = useState<any>();
+  const [error, setError] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // state contexts
   const { passwordType, changePassType } = useContext(AuthContext);
@@ -28,7 +30,7 @@ const Register = () => {
   const userDetails = { firstName, lastName, email, password };
 
   // handle registration function
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: any) => {
     setLoading(true);
     e.preventDefault();
     try {

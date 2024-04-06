@@ -5,7 +5,9 @@ const MovieDetails = () => {
   //
   const navigate = useNavigate();
   // check if user is logged in
-  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  const users_data_exists = JSON.parse(
+    localStorage.getItem("users_details") || ""
+  );
   useEffect(() => {
     if (!users_data_exists) {
       navigate("/login");
@@ -14,9 +16,9 @@ const MovieDetails = () => {
 
   //
   let { state } = useLocation();
-  const [movie, setMovie] = useState();
-  const [allTrail, setAllTrail] = useState();
-  const [movieTrailer, setMovieTrailer] = useState("");
+  const [movie, setMovie] = useState<any>();
+  const [allTrail, setAllTrail] = useState<any>();
+  const [movieTrailer, setMovieTrailer] = useState<any>("");
   useEffect(() => {
     setMovie(state.movie);
     //
@@ -28,7 +30,7 @@ const MovieDetails = () => {
         );
         const trailerData = await trailerRes.json();
         setAllTrail(trailerData.results);
-        const trail = trailerData.results.filter((result) => {
+        const trail = trailerData.results.filter((result: any) => {
           return result.name === "Official Trailer";
         });
         setMovieTrailer(trail[0]);
