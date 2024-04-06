@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { createContext } from "react";
 
-export const MoviesContext = createContext();
-const MoviesContextProvider = ({ children }) => {
+export const MoviesContext = createContext<any>(null);
+const MoviesContextProvider = ({ children }: any) => {
   // movies context global states
-  const [page, setPage] = useState(1);
-  const [pageChanged, setPageChanged] = useState(false);
-  const [movieName, setMovieName] = useState("");
+  const [page, setPage] = useState<number>(1);
+  const [pageChanged, setPageChanged] = useState<boolean>(false);
+  const [movieName, setMovieName] = useState<any>("");
 
   // global functions
 

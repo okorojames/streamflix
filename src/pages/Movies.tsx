@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 // import useFetch from "../hooks/useFetch";
 import { MoviesContext } from "../contexts/MoviesContext";
@@ -20,16 +20,18 @@ const Movies = () => {
 
   const navigate = useNavigate();
   // normal states
-  const [searchedMovies, setSearchedMovies] = useState();
-  const [movies, setMovies] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [total, setTotal] = useState();
+  const [searchedMovies, setSearchedMovies] = useState<any>();
+  const [movies, setMovies] = useState<any>();
+  const [isLoading, setIsLoading] = useState<any>(true);
+  const [total, setTotal] = useState<number>(0);
   //
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   //
   // check if user is logged in
-  const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
+  const users_data_exists = JSON.parse(
+    localStorage.getItem("users_details") || ""
+  );
   useEffect(() => {
     if (!users_data_exists) {
       navigate("/login");
@@ -79,17 +81,15 @@ const Movies = () => {
   }, [page]);
 
   // set movie title limit
-  const titleLimit = 25;
-  const truncateTitle = (title) => {
-    if (title.length > titleLimit) {
-      let slicedTitle = title.slice(0, titleLimit);
-      return slicedTitle + "...";
+  const truncateTitle = (title: string) => {
+    if (title.length > 20) {
+      return `${title.slice(0, 20)}...`;
     }
     return title;
   };
 
   // handle search movies
-  const handleSearchMovies = async (e) => {
+  const handleSearchMovies = async (e: any) => {
     e.preventDefault();
     try {
       if (movieName === "") {
@@ -111,7 +111,7 @@ const Movies = () => {
   };
 
   //
-  const handlePageClick = ({ selected }) => {
+  const handlePageClick = ({ selected }: { selected: number }) => {
     const params = new URLSearchParams();
     const page = selected + 1;
     params.set("page", page.toString());
@@ -138,7 +138,7 @@ const Movies = () => {
         {pageChanged === true ? (
           <article className="searched_movies_row">
             {searchedMovies &&
-              searchedMovies.map((movie) => (
+              searchedMovies.map((movie: any) => (
                 <Link
                   to={`/movie_details/${movie.id}`}
                   key={movie.id}
@@ -172,7 +172,7 @@ const Movies = () => {
             {isLoading && <MovieSkeletonLoaders />}
             <figure className="movies_display">
               {movies &&
-                movies.map((movie, index) => (
+                movies.map((movie: any, index: number) => (
                   <Link
                     to={`/movie_details/${movie.id}`}
                     key={index}
