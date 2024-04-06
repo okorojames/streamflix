@@ -1,5 +1,11 @@
-import { Link, Route, Routes, useLocation } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
+import Navbar from "@/components/Navbar";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import Movies from "./pages/Movies";
@@ -41,7 +47,8 @@ export default App;
 
 export const GetToTop = () => {
   const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
   useEffect(() => {
     scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [pathname]);
+  }, [pathname, searchParams]);
 };

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/streamflix-logo.png";
 
@@ -6,10 +6,10 @@ const Navbar = () => {
   //
   const navigate = useNavigate();
   // const refs
-  const nav_links = useRef();
-  const burger_one = useRef();
-  const burger_two = useRef();
-  const burger_three = useRef();
+  const nav_links = useRef(null);
+  const burger_one = useRef(null);
+  const burger_two = useRef(null);
+  const burger_three = useRef(null);
   // handle toggle nav
   const handle_toggle_nav = () => {
     nav_links.current.classList.toggle("nav_toggle");

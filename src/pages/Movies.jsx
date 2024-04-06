@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 // import useFetch from "../hooks/useFetch";
 import { MoviesContext } from "../contexts/MoviesContext";
 import MovieSkeletonLoader, {
   MovieSkeletonLoaders,
 } from "../components/MovieSkeletonLoader";
+import ReactPaginate from "react-paginate";
 
 const Movies = () => {
   //global states here...
   const {
-    page,
     pageChanged,
     setPageChanged,
     movieName,
@@ -18,13 +18,16 @@ const Movies = () => {
     handleDecrePage,
   } = useContext(MoviesContext);
 
+  const navigate = useNavigate();
   // normal states
   const [searchedMovies, setSearchedMovies] = useState();
   const [movies, setMovies] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [total, setTotal] = useState();
   //
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || 1;
+  //
   // check if user is logged in
   const users_data_exists = JSON.parse(localStorage.getItem("users_details"));
   useEffect(() => {
@@ -53,11 +56,17 @@ const Movies = () => {
           `https://api.themoviedb.org/3/tv/top_rated?api_key=296b046a3d7afb8c7d9de3d141e11353&language=en-US&page=${page}`
         );
         const data4 = await movies4.json();
+        const total1 = data1.total_results;
+        const total2 = data2.total_results;
+        const total3 = data3.total_results;
+        const total4 = data4.total_results;
+        const total = total1 + total2 + total3 + total4;
+        setTotal(total);
         const allMovies = [
-          ...data1.results,
-          ...data2.results,
-          ...data3.results,
-          ...data4.results,
+          ...data1?.results,
+          ...data2?.results,
+          ...data3?.results,
+          ...data4?.results,
         ];
         setMovies(allMovies);
         setIsLoading(false);
@@ -99,6 +108,14 @@ const Movies = () => {
       console.log(err);
     }
     setMovieName("");
+  };
+
+  //
+  const handlePageClick = ({ selected }) => {
+    const params = new URLSearchParams();
+    const page = selected + 1;
+    params.set("page", page.toString());
+    navigate({ search: params.toString() });
   };
 
   //
@@ -181,17 +198,19 @@ const Movies = () => {
                   </Link>
                 ))}
             </figure>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel=">"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              pageCount={Math.ceil(total / 20)}
+              previousLabel="<"
+              renderOnZeroPageCount={null}
+              className="pagination"
+              activeClassName="active"
+            />
           </>
         )}
-        <div className="next_and_previous_page">
-          <button className="next_button" onClick={handleIncrePage}>
-            <i className="bx bx-chevrons-left"></i>
-          </button>
-          <p>{page}</p>
-          <button className="previous_button" onClick={handleDecrePage}>
-            <i className="bx bx-chevrons-right"></i>
-          </button>
-        </div>
       </>
       {/*  */}
     </section>
